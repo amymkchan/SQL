@@ -2,6 +2,19 @@
 Today's Topic: Stored Procedures
 */
 
+CREATE OR REPLACE PROCEDURE control_transaction()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+  CREATE TABLE test1 (id int);
+  INSERT INTO test1 VALUES (1);
+  COMMIT;
+  
+  CREATE TABLE test2 (id int);
+  INSERT INTO test2 VALUES (1);
+  ROLLBACK;
+END $$;
 
 CREATE PROCEDURE Temp_person 
 AS
